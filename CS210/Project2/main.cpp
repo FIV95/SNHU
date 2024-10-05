@@ -5,6 +5,7 @@
 int main () {
     App app;
     app.PrintMenu();
+    app.GetName();
     std::array<double, 4> results = app.GetInput();
     app.ConfirmResults(results);
     return 0;

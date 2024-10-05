@@ -29,6 +29,14 @@ void App::PrintMenu()
     std::cin.get();
 }
 
+std::string App::GetName()
+{
+    std::string name;
+    std::cout << "Enter a name for your investment: ";
+    std::cin >> name;
+    return name;
+}
+
 std::array<double, 4> App::GetInput()
 {
     std::string input;

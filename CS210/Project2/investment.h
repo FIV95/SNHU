@@ -1,23 +1,32 @@
 #ifndef INVESTMENT_H
 #define INVESTMENT_H
 #include <cmath>
+#include <vector>
+#include <string>
+#include <string>
 
 class Investment {
   public:
-  Investment(double num1, double num2, double num3 , double num4) {
+  Investment(double num1, double num2, double num3 , double num4, const std::string& name) {
     this->initialInvestment = num1;
     this->monthlyDeposit = num2;
-    this->annualInterest = num3;
+    this->annualInterestInPercent = num3;
     this->numberOfYears = num4;
-    this->annualInterest = this->convertAnnualInterest(this->annualInterest);
+    this->name = name;
+    this->annualInterestConverted = this->convertAnnualInterest(this->annualInterest);
     initializeMatrix();
   }
-  
+
   // Getters
   double getInitialInvestment() const {return initialInvestment;}
   double getMonthlyDeposit() const {return monthlyDeposit;}
   double getAnnualInterest() const {return annualInterest;}
   double getNumberOfYears() const {return numberOfYears;}
+
+  // additional data storage
+  std::vector<double> intitialInvestmentValues;
+  std::vector<double> interestWithoutMonthlyDeposits;
+  std::vector<double> interestWithMonthlyDeposits;
 
   // Setters
 
@@ -27,10 +36,13 @@ class Investment {
   void setNumberOfYears(double num) {numberOfYears = num;}
 
   private:
+  std::string name;
   double initialInvestment;
   double monthlyDeposit;
   double annualInterest;
   double numberOfYears;
+  double annualInterestInPercent;
+  double annualInterestConverted;
   // matrix to hold our data
   // two rows - 1 for:
   //              *Financial outcomes with monthly payments
@@ -43,14 +55,21 @@ class Investment {
   double matrix[rows][cols];
 
   void initializeMatrix() {
+    // model of matrix info
+    // [0] = initial investment
+    // [1] = monthly deposit
+    // [2] = annual interest
+    // [3] = number of years
+
     matrix[0][0] = this->getInitialInvestment();
     matrix[0][1] = this->getMonthlyDeposit();
-    matrix[0][2] = this->
+    matrix[0][2] = this->getAnnualInterest();
+    matrix[0][3] = this->getNumberOfYears();
   }
-  
-  
 
-  void convertAnnualInterest(double& num)
+
+
+  double convertAnnualInterest(double& num)
   {
     num = num / 100;
   }
