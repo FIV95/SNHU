@@ -9,6 +9,8 @@ class Investment {
     this->monthlyDeposit = num2;
     this->annualInterest = num3;
     this->numberOfYears = num4;
+    this->annualInterest = this->convertAnnualInterest(this->annualInterest);
+    initializeMatrix();
   }
   
   // Getters
@@ -36,6 +38,15 @@ class Investment {
   //
   // Year end balances // Year-earned Interest
   // Year end balances // Year-earned interest - based on monthly deposit value
+  static const int rows = 2;
+  static const int cols = 10;
+  double matrix[rows][cols];
+
+  void initializeMatrix() {
+    matrix[0][0] = this->getInitialInvestment();
+    matrix[0][1] = this->getMonthlyDeposit();
+    matrix[0][2] = this->
+  }
   
   
 
