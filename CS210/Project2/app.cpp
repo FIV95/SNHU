@@ -4,6 +4,7 @@
 #include <string>
 #include "utils.h"
 #include <array>
+#include <limits>
 
 App::App() : running(true)
 {
@@ -27,14 +28,6 @@ void App::PrintMenu()
 
     std::cout << "Press any key to continue..." << std::endl;
     std::cin.get();
-}
-
-std::string App::GetName()
-{
-    std::string name;
-    std::cout << "Enter a name for your investment: ";
-    std::cin >> name;
-    return name;
 }
 
 std::array<double, 4> App::GetInput()
@@ -298,6 +291,9 @@ void ::App::ConfirmResults(std::array<double, 4>& results)
         this->ConfirmResults(results);
         break;
     case 'c':
+        choicesConfirmed = true;
+        break;
+    case 'C':
         choicesConfirmed = true;
         break;
 

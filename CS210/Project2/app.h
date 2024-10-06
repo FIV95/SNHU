@@ -8,7 +8,6 @@ class App {
     public:
         App();
         void PrintMenu();
-        std::string GetName();
         std::array<double, 4> GetInput();
         void PrintConfirmChoices();
         void ConfirmResults(std::array<double, 4>& results);
