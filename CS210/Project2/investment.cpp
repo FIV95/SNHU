@@ -4,103 +4,70 @@
 #include <iomanip>
 
 // Constructor
-Investment::Investment(double num1, double num2, double num3, double num4) {
-    this->initialInvestment = num1;
-    this->monthlyDeposit = num2;
-    this->annualInterestInPercent = num3;
-    this->numberOfYears = num4;
-    this->annualInterestConverted = this->convertAnnualInterest(this->annualInterestInPercent);
-    this->rows = this->numberOfYears * 12;
-    this->resultsWithMonthlyPayments = std::vector<std::vector<double>>(rows, std::vector<double>(cols));
-    this->resultsWithoutMonthlyPayments = std::vector<std::vector<double>>(rows, std::vector<double>(cols));
-    investmentCalculationsMonthly(resultsWithMonthlyPayments);
-    investmentCalculationsWithoutMonthlyDeposits(resultsWithoutMonthlyPayments);
-    
+Investment::Investment(double t_initialInvestment, double t_monthlyDeposit, double t_annualInterest, double t_numberOfYears) {
+    this->m_initialInvestment = t_initialInvestment;
+    this->m_monthlyDeposit = t_monthlyDeposit;
+    this->m_annualInterest = t_annualInterest;
+    this->m_numberOfYears = t_numberOfYears;
+    this->m_annualInterestConverted = this->convertAnnualInterest(this->m_annualInterest);
+    this->m_rows = static_cast<int>(this->m_numberOfYears * 12);
+    this->m_resultsWithMonthlyPayments = std::vector<std::vector<double> >(m_rows, std::vector<double>(COLS));
+    this->m_resultsWithoutMonthlyPayments = std::vector<std::vector<double> >(m_rows, std::vector<double>(COLS));
+    setInvestmentCalculationsMonthly();
+    setInvestmentCalculationsWithoutMonthlyDeposits();
 }
 
 // Getters
-double Investment::getInitialInvestment() const { return initialInvestment; }
-double Investment::getMonthlyDeposit() const { return monthlyDeposit; }
-double Investment::getAnnualInterest() const { return annualInterest; }
-double Investment::getNumberOfYears() const { return numberOfYears; }
-
-void Investment::displayMonthlyResultsWithDeposits() {
-    std::cout << std::fixed << std::setprecision(2);
-    std::cout << "\tMonth\tOpening Amount\t\tDeposited Amount\tTotal\t\tInterest\t\tClosing Balance\n";
-
-    for (int month = 0; month < rows; ++month) {
-        if ((month + 1) % 12 == 0) {
-            std::cout << "\tYear " << (month + 1) / 12 << "\t";
-        } else {
-            std::cout <<"\t" << month + 1 << "\t";
-        }
-        std::cout << resultsWithMonthlyPayments[month][0] << "\t\t\t"
-                  << resultsWithMonthlyPayments[month][1] << "\t\t\t"
-                  << resultsWithMonthlyPayments[month][2] << "\t\t"
-                  << resultsWithMonthlyPayments[month][3] << "\t\t\t"
-                  << resultsWithMonthlyPayments[month][4] << "\n";
-    }
-}
-
+double Investment::getInitialInvestment() const { return m_initialInvestment; }
+double Investment::getMonthlyDeposit() const { return m_monthlyDeposit; }
+double Investment::getAnnualInterest() const { return m_annualInterest; }
+double Investment::getNumberOfYears() const { return m_numberOfYears; }
 
 // Private methods
-double Investment::convertAnnualInterest(double &num) {
-    return num / 100;
+double Investment::convertAnnualInterest(double &t_num) {
+    return (t_num / 100) / 12;
 }
 
-bool Investment::decimalCheckYears(double num) {
-    return num == static_cast<int>(num);
+int Investment::numberOfMonthsConversion(double t_num) {
+    return static_cast<int>(t_num) * 12;
 }
 
-int Investment::numberOfMonthsConversion(double num) {
-    return static_cast<int>(num) * 12;
-}
+void Investment::setInvestmentCalculationsMonthly() {
+    double openingBalance = m_initialInvestment;
+    double closingBalance = 0.0;
+    double interest = 0.0;
 
-int Investment::getNumberOfMonthlyDeposits() {
-    return this->numberOfMonthsConversion(this->numberOfYears) * this->getMonthlyDeposit();
-}
-
-void Investment::investmentCalculationsMonthly(std::vector<std::vector<double>>& results) {
-    double balanceWithDeposits = initialInvestment;
-    double monthlyInterestRate = annualInterestConverted / 12;
-
-    for (int month = 0; month < rows; ++month) {
-        double openingAmount = balanceWithDeposits;
-        double depositedAmount = monthlyDeposit;
-        double total = openingAmount + depositedAmount;
-        double interest = total * monthlyInterestRate;
-        double closingBalance = total + interest;
-
-        resultsWithMonthlyPayments[month][0] = openingAmount;
-        resultsWithMonthlyPayments[month][1] = depositedAmount;
-        resultsWithMonthlyPayments[month][2] = total;
-        resultsWithMonthlyPayments[month][3] = interest;
-        resultsWithMonthlyPayments[month][4] = closingBalance;
-
-        balanceWithDeposits = closingBalance;
+    for (int i = 0; i < m_rows; ++i) {
+        interest = (openingBalance + m_monthlyDeposit) * m_annualInterestConverted;
+        closingBalance = openingBalance + m_monthlyDeposit + interest;
+        m_resultsWithMonthlyPayments[i][0] = openingBalance;
+        m_resultsWithMonthlyPayments[i][1] = m_monthlyDeposit;
+        m_resultsWithMonthlyPayments[i][2] = interest;
+        m_resultsWithMonthlyPayments[i][3] = closingBalance;
+        openingBalance = closingBalance;
     }
 }
 
-void Investment::investmentCalculationsWithoutMonthlyDeposits(std::vector<std::vector<double>>& results) {
-    double balanceWithoutDeposits = initialInvestment;
-    double monthlyInterestRate = annualInterestConverted / 12;
+void Investment::setInvestmentCalculationsWithoutMonthlyDeposits() {
+    double openingBalance = m_initialInvestment;
+    double closingBalance = 0.0;
+    double interest = 0.0;
 
-    for (int month = 0; month < rows; ++month) {
-        double openingAmount;
-        double interest = balanceWithoutDeposits * monthlyInterestRate;
-        if (month == 0) {
-            openingAmount = initialInvestment;
-        } else {
-            openingAmount = resultsWithoutMonthlyPayments[month - 1][2];
-        }
-        double total = openingAmount + interest;
-
-        resultsWithoutMonthlyPayments[month][0] = openingAmount;
-        resultsWithoutMonthlyPayments[month][1] = 0.0;
-        resultsWithoutMonthlyPayments[month][2] = total;
-        resultsWithoutMonthlyPayments[month][3] = interest;
-        resultsWithoutMonthlyPayments[month][4] = total;
-
-        balanceWithoutDeposits = total;
+    for (int i = 0; i < m_rows; ++i) {
+        interest = openingBalance * m_annualInterestConverted;
+        closingBalance = openingBalance + interest;
+        m_resultsWithoutMonthlyPayments[i][0] = openingBalance;
+        m_resultsWithoutMonthlyPayments[i][1] = 0.0;
+        m_resultsWithoutMonthlyPayments[i][2] = interest;
+        m_resultsWithoutMonthlyPayments[i][3] = closingBalance;
+        openingBalance = closingBalance;
     }
+}
+
+std::vector<std::vector<double> > Investment::getResultsWithMonthlyPayments() const {
+    return m_resultsWithMonthlyPayments;
+}
+
+std::vector<std::vector<double> > Investment::getResultsWithoutMonthlyPayments() const {
+    return m_resultsWithoutMonthlyPayments;
 }

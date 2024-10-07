@@ -2,42 +2,33 @@
 #define INVESTMENT_H
 
 #include <vector>
-#include <string>
 
 class Investment {
-public:
-    // Constructor
-    Investment(double num1, double num2, double num3, double num4);
+    public:
+        Investment(double t_initialInvestment, double t_monthlyDeposit, double t_annualInterest, double t_numberOfYears);
+        double getInitialInvestment() const;
+        double getMonthlyDeposit() const;
+        double getAnnualInterest() const;
+        double getNumberOfYears() const;
+        std::vector<std::vector<double> > getResultsWithMonthlyPayments() const;
+        std::vector<std::vector<double> > getResultsWithoutMonthlyPayments() const;
 
-    // Getters
-    double getInitialInvestment() const;
-    double getMonthlyDeposit() const;
-    double getAnnualInterest() const;
-    double getNumberOfYears() const;
+    private:
+        double m_initialInvestment;
+        double m_monthlyDeposit;
+        double m_annualInterest;
+        double m_numberOfYears;
+        double m_annualInterestConverted;
+        int m_rows;
+        std::vector<std::vector<double> > m_resultsWithMonthlyPayments;
+        std::vector<std::vector<double> > m_resultsWithoutMonthlyPayments;
+        static const int COLS = 5;
 
-
-    // Display monthly results
-    void displayMonthlyResultsWithDeposits();
-    void displayMonthlyResultsWithoutDeposits();
-
-private:
-    double initialInvestment;
-    double monthlyDeposit;
-    double annualInterest;
-    double numberOfYears;
-    double annualInterestInPercent;
-    double annualInterestConverted;
-    int rows;
-    static const int cols = 5;
-    std::vector<std::vector<double>> resultsWithMonthlyPayments;
-    std::vector<std::vector<double>> resultsWithoutMonthlyPayments;
-
-    double convertAnnualInterest(double &num);
-    bool decimalCheckYears(double num);
-    int numberOfMonthsConversion(double num);
-    int getNumberOfMonthlyDeposits();
-    void investmentCalculationsMonthly(std::vector<std::vector<double>>& results);
-    void investmentCalculationsWithoutMonthlyDeposits(std::vector<std::vector<double>>& results);
+        double convertAnnualInterest(double &t_num);
+        int numberOfMonthsConversion(double t_num);
+        int getNumberOfMonthlyDeposits();
+        void setInvestmentCalculationsMonthly();
+        void setInvestmentCalculationsWithoutMonthlyDeposits();
 };
 
 #endif // INVESTMENT_H
