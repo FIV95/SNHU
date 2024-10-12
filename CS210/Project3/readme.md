@@ -11,6 +11,10 @@ This project is an item-tracking program for the Corner Grocer. It analyzes text
 - **Backup Frequency Results**: Backs up the frequency results in an output `.dat` file.
 - **Exit the Program**: Allows the user to exit the program.
 
+## UML Diagram
+
+![Diagram](Lawrence_Francis_Project3_UML.png)
+
 ## Classes
 
 ### App
