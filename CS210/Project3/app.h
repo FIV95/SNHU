@@ -3,6 +3,11 @@
 
 #include <string>
 #include <vector>
+#include "InputDocument.h" 
+
+class InputDocument;
+class OutputDocument;
+class Product;
 
 class App
 {
