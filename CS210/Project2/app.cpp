@@ -6,139 +6,155 @@
 #include <array>
 #include <limits>
 
-App::App() : running(true)
-{
+// Constructor for the App class, initializes the m_running member to true
+App::App() : m_running(true) {}
+
+// Function to display results with monthly deposits
+void App::displayResultsWithMonthlyDeposits(const std::vector<std::vector<double> >& resultsWithMonthlyPayments) {
+    std::cout << std::fixed << std::setprecision(2);  // Set the precision for output to 2 decimal places
+    std::cout << "Results with Monthly Deposits:\n";
+    std::cout << "\tYear\tOpening Amount\t\tDeposited Amount\tTotal\t\tInterest\t\tClosing Balance\n";
+
+    // Loop through the results for each month
+    for (size_t month = 0; month < resultsWithMonthlyPayments.size(); ++month) {
+        // Only display data for each year (every 12 months)
+        if ((month + 1) % 12 == 0) {
+            int year = (month + 1) / 12;  // Calculate the year based on the month index
+            std::cout <<"\t" << year << "\t";
+
+            // Print the results for the current year
+            std::cout << "$" << resultsWithMonthlyPayments[month][0] << "\t\t\t"
+                      << "$" << resultsWithMonthlyPayments[month][1] << "\t\t\t"
+                      << "$" << resultsWithMonthlyPayments[month][2] << "\t\t"
+                      << "$" << resultsWithMonthlyPayments[month][3] << "\t\t\t"
+                      << "$" << resultsWithMonthlyPayments[month][4] << "\n";
+        }
+    }
+    std::cout << "\n\n";
 }
 
-void App::PrintMenu()
-{
-    // Print the top border
-    std::cout << std::setfill('*') << std::setw(52) << "*" << std::endl;
+// Function to display results without monthly deposits
+void App::displayResultsWithoutMonthlyDeposits(const std::vector<std::vector<double> >& resultsWithoutMonthlyPayments) {
+    std::cout << std::fixed << std::setprecision(2);  // Set precision to 2 decimal places
+    std::cout << "Results without Monthly Deposits:\n";
+    std::cout << "\tYear\tOpening Amount\t\tDeposited Amount\tTotal\t\tInterest\t\tClosing Balance\n";
 
-    // Print the title with padding
+    // Loop through the results for each month
+    for (size_t month = 0; month < resultsWithoutMonthlyPayments.size(); ++month) {
+        if ((month + 1) % 12 == 0) {  // Only display data every 12 months
+            int year = (month + 1) / 12;  // Calculate the year
+            std::cout <<"\t" << year << "\t";
+
+            // Print the results for the current year
+            std::cout << "$" << resultsWithoutMonthlyPayments[month][0] << "\t\t\t"
+                      << "$" << resultsWithoutMonthlyPayments[month][1] << "\t\t\t"
+                      << "$" << resultsWithoutMonthlyPayments[month][2] << "\t\t"
+                      << "$" << resultsWithoutMonthlyPayments[month][3] << "\t\t\t"
+                      << "$" << resultsWithoutMonthlyPayments[month][4] << "\n";
+        }
+    }
+    std::cout << "\n\n";
+}
+
+// Function to print the main menu
+void App::PrintMenu() {
+    std::cout << std::setfill('*') << std::setw(52) << "*" << std::endl;  // Print a line of asterisks
     std::cout << std::setfill('*') << std::setw(20) << "*" << " Data Input " << std::setw(20) << "*" << std::endl;
-
     std::cout << "Inital Investment Amount: " << std::endl;
-
     std::cout << "Monthly Deposit: " << std::endl;
-
     std::cout << "Annual Interest: " << std::endl;
-
     std::cout << "Number of years: " << std::endl;
-
     std::cout << "Press any key to continue..." << std::endl;
-    std::cin.get();
+    std::cin.get();  // Wait for user input to continue
 }
 
-std::array<double, 4> App::GetInput()
-{
+// Function to get user input for the investment data
+std::array<double, 4> App::GetInput() {
     std::string input;
     double initialInvestment;
     double monthlyDeposit;
     double annualInterest;
     double numYears;
-    std::array<double, 4> answers;
+    std::array<double, 4> answers;  // Array to store the inputs
 
-    do
-    {
+    // Loop to get valid initial investment
+    do {
         std::cout << "Enter the initial investment amount: ";
         std::cin >> input;
 
-        if (!isValidDouble(input))
-        {
+        if (!isValidDouble(input)) {  // Validate input
             std::cout << "Invalid input. Please enter a valid number." << std::endl;
-            std::cin.clear();
+            std::cin.clear();  // Clear the input stream
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-        else
-        {
-            initialInvestment = std::stod(input);
-            if (initialInvestment < 0)
-            {
+        } else {
+            initialInvestment = std::stod(input);  // Convert input to double
+            if (initialInvestment < 0) {
                 std::cout << "Initial investment must be greater than 0." << std::endl;
             }
-            answers[0] = initialInvestment;
+            answers[0] = initialInvestment;  // Store the valid input
             std::cin.clear();
             break;
         }
 
     } while (initialInvestment < 0);
 
-    do
-    {
+    // Loop to get valid monthly deposit
+    do {
         std::cout << "Enter the monthly deposit amount: ";
         std::cin >> input;
 
-        if (!isValidInt(input))
-        {
+        if (!isValidInt(input)) {  // Validate input
             std::cout << "Invalid input. Please enter a valid number." << std::endl;
-            std::cin.clear();                                                   // Clear the error flags
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
-        }
-        else
-        {
-            monthlyDeposit = std::stoi(input);
-            if (monthlyDeposit < 0)
-            {
+            std::cin.clear();  // Clear the input stream
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        } else {
+            monthlyDeposit = std::stoi(input);  // Convert input to integer
+            if (monthlyDeposit < 0) {
                 std::cout << "Monthly deposit must be greater than 0." << std::endl;
-            }
-            else
-            {
-                answers[1] = monthlyDeposit;
+            } else {
+                answers[1] = monthlyDeposit;  // Store the valid input
                 std::cin.clear();
                 break;
             }
         }
     } while (true);
 
-    do
-    {
+    // Loop to get valid annual interest rate
+    do {
         std::cout << "Enter the annual interest rate: ";
         std::cin >> input;
 
-        if (!isValidDouble(input))
-        {
+        if (!isValidDouble(input)) {  // Validate input
             std::cout << "Invalid input. Please enter a valid number." << std::endl;
-            std::cin.clear();
+            std::cin.clear();  // Clear the input stream
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-        else
-        {
-            annualInterest = std::stod(input);
-            if (annualInterest < 0)
-            {
+        } else {
+            annualInterest = std::stod(input);  // Convert input to double
+            if (annualInterest < 0) {
                 std::cout << "Annual interest must be greater than 0." << std::endl;
-            }
-            else
-            {
-                answers[2] = annualInterest;
+            } else {
+                answers[2] = annualInterest;  // Store the valid input
                 std::cin.clear();
                 break;
             }
         }
     } while (true);
 
-    do
-    {
+    // Loop to get valid number of years
+    do {
         std::cout << "Enter the number of years for this investment: ";
         std::cin >> input;
 
-        if (!isValidInt(input))
-        {
+        if (!isValidInt(input)) {  // Validate input
             std::cout << "Invalid input. Please enter a valid number." << std::endl;
-            std::cin.clear();
+            std::cin.clear();  // Clear the input stream
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-        else
-        {
-            numYears = std::stoi(input);
-            if (numYears < 0)
-            {
+        } else {
+            numYears = std::stoi(input);  // Convert input to integer
+            if (numYears < 0) {
                 std::cout << "Number of years must be greater than 0." << std::endl;
-            }
-            else
-            {
-                answers[3] = numYears;
+            } else {
+                answers[3] = numYears;  // Store the valid input
                 std::cin.clear();
                 break;
             }
@@ -146,160 +162,129 @@ std::array<double, 4> App::GetInput()
     } while (true);
 
     std::cout << std::endl;
-    return {answers[0], answers[1], answers[2], answers[3]};
+    return {answers[0], answers[1], answers[2], answers[3]};  // Return the user inputs
 }
 
-void ::App::PrintConfirmChoices()
-{
-    std::cout << std::setfill('-') << std::setw(52) << "-" << std::endl;
+// Function to display confirmation of user choices
+void App::PrintConfirmChoices() {
+    std::cout << std::setfill('-') << std::setw(52) << "-" << std::endl;  // Print separator line
     std::cout << "Press 'i' to change the initial investment amount." << std::endl;
     std::cout << "Press 'm' to change the monthly deposit amount." << std::endl;
     std::cout << "Press 'a' to change the annual interest rate." << std::endl;
     std::cout << "Press 'y' to change the number of years." << std::endl;
     std::cout << "Press 'c' to continue." << std::endl;
+    std::cout << "Press 'q' to quit." << std::endl;
 }
 
-void ::App::ConfirmResults(std::array<double, 4>& results)
-{
-    char choice;
-    std::string input;
+// Function to confirm or change inputted results
+void App::ConfirmResults(std::array<double, 4>& results) {
     bool choicesConfirmed = false;
+    std::string input;
+    char choice;
 
-    // Print the top border
-    std::cout << std::setfill('*') << std::setw(52) << "*" << std::endl;
+    while (!choicesConfirmed && this->m_running) {
+        // Print the confirmation menu
+        std::cout << std::setfill('*') << std::setw(19) << "*" << " Confirmation " << std::setw(19) << "*" << std::endl;
+        std::cout << "Initial Investment Amount: $" << results[0] << std::endl;
+        std::cout << "Monthly Deposit: $" << results[1] << std::endl;
+        std::cout << "Annual Interest: " << results[2] << "%" << std::endl;
+        std::cout << "Number of years: " << results[3] << std::endl;
 
-    // Print the title with padding
-    std::cout << std::setfill('*') << std::setw(19) << "*" << " Confirmation " << std::setw(19) << "*" << std::endl;
+        this->PrintConfirmChoices();  // Display options for the user
+        std::cin >> choice;  // Get the user's choice
 
-    std::cout << "Initial Investment Amount: $" << results[0] << std::endl;
-    std::cout << "Monthly Deposit: $" << results[1] << std::endl;
-    std::cout << "Annual Interest: " << results[2] << "%" << std::endl;
-    std::cout << "Number of years: " << results[3] << std::endl;
+        // Clear the input stream to avoid leftover characters
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    //  ask user if they want to continue with input or change it
-    this->PrintConfirmChoices();
-    while (!choicesConfirmed) {
-        std::cin >> choice;
-    switch (choice)
-    {
-    case 'i':
-        do
-        {
-            std::cout << "Enter the new initial investment amount: ";
-            std::cin >> input;
-            std::cout << std::endl;
-
-            if (!isValidDouble(input))
-            {
-                std::cout << "Invalid input. Please enter a valid number." << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-            else
-            {
-                results[0] = std::stod(input);
-                std::cout << std::endl;
-                if (results[0] < 0)
-                {
-                    std::cout << "Initial investment must be greater than 0." << std::endl;
-                }
-                std::cin.clear();
+        // Handle the user's choice and allow changes to the inputs
+        switch (choice) {
+            case 'i':
+                do {
+                    std::cout << "Enter the new initial investment amount: ";
+                    std::cin >> input;
+                    std::cout << std::endl;
+                    if (!isValidDouble(input)) {
+                        std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    } else {
+                        results[0] = std::stod(input);  // Update the initial investment
+                        std::cout << std::endl;
+                        break;
+                    }
+                } while (true);
                 break;
-            }
-        } while (true);
-        this->ConfirmResults(results);
-        break;
-    case 'm':
-        do
-        {
-            std::cout << "Enter the new monthly deposit amount: ";
-            std::cin >> input;
-            std::cout << std::endl;
-
-            if (!isValidInt(input))
-            {
-                std::cout << "Invalid input. Please enter a valid number." << std::endl;
-                std::cin.clear();                                                   // Clear the error flags
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
-            }
-            else
-            {
-                results[1] = std::stoi(input);
-                std::cout << std::endl;
-                if (results[1] < 0)
-                {
-                    std::cout << "Monthly deposit must be greater than 0." << std::endl;
-                }
-                std::cin.clear();
+            case 'm':
+                do {
+                    std::cout << "Enter the new monthly deposit amount: ";
+                    std::cin >> input;
+                    std::cout << std::endl;
+                    if (!isValidDouble(input)) {
+                        std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    } else {
+                        results[1] = std::stod(input);  // Update the monthly deposit
+                        std::cout << std::endl;
+                        break;
+                    }
+                } while (true);
                 break;
-            }
-        } while (true);
-        this->ConfirmResults(results);
-        break;
-    case 'a':
-        do
-        {
-            std::cout << "Enter the new annual interest rate: ";
-            std::cin >> input;
-            std::cout << std::endl;
-
-            if (!isValidDouble(input))
-            {
-                std::cout << "Invalid input. Please enter a valid number." << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-            else
-            {
-                results[2] = std::stod(input);
-                std::cout << std::endl;
-                if (results[2] < 0)
-                {
-                    std::cout << "Annual interest must be greater than 0." << std::endl;
-                }
-                std::cin.clear();
+            case 'a':
+                do {
+                    std::cout << "Enter the new annual interest rate: ";
+                    std::cin >> input;
+                    std::cout << std::endl;
+                    if (!isValidDouble(input)) {
+                        std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    } else {
+                        results[2] = std::stod(input);  // Update the annual interest rate
+                        std::cout << std::endl;
+                        break;
+                    }
+                } while (true);
                 break;
-            }
-        } while (true);
-        this->ConfirmResults(results);
-        break;
-    case 'y':
-        do
-        {
-            std::cout << "Enter the new number of years for this investment: ";
-            std::cin >> input;
-            std::cout << std::endl;
-
-            if (!isValidInt(input))
-            {
-                std::cout << "Invalid input. Please enter a valid number." << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-            else
-            {
-                results[3] = std::stoi(input);
-                std::cout << std::endl;
-                if (results[3] < 0)
-                {
-                    std::cout << "Number of years must be greater than 0." << std::endl;
-                }
-                std::cin.clear();
+            case 'y':
+                do {
+                    std::cout << "Enter the new number of years for this investment: ";
+                    std::cin >> input;
+                    std::cout << std::endl;
+                    if (!isValidInt(input)) {
+                        std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    } else {
+                        results[3] = std::stoi(input);  // Update the number of years
+                        std::cout << std::endl;
+                        break;
+                    }
+                } while (true);
                 break;
-            }
-        } while (true);
-        this->ConfirmResults(results);
-        break;
-    case 'c':
-        choicesConfirmed = true;
-        break;
-    case 'C':
-        choicesConfirmed = true;
-        break;
-
-    default:
-        break;
-
+            case 'c':  // Confirm the input
+            case 'C':
+                choicesConfirmed = true;
+                break;
+            case 'q':  // Quit the application
+            case 'Q':
+                this->Quit();
+                break;
+            default:
+                std::cout << "Invalid choice. Please try again." << std::endl;
+                break;
+        }
     }
-    }
+}
+
+// Function to check if the application is running
+bool App::isRunning() const {
+    return m_running;
+}
+
+// Function to quit the application
+void App::Quit() {
+    std::cout << "Goodbye!" << std::endl;
+    this->m_running = false;  // Set the running state to false
 }
