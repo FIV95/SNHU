@@ -3,15 +3,16 @@
 #include <iomanip>
 #include <string>
 #include <vector>
+#include "Validations.h"
 
 // print methods
 
 // constructor
 App::App()
 {
-  this->running = true;
-  this->hasDocument = false;
-  this->osType = Validations::osCheck();
+    this->running = true;
+    this->hasDocument = false;
+    this->osType = Validations::osCheck();
 }
 
 void printMenu()
@@ -44,9 +45,10 @@ void printMenu()
 
 void getInput()
 {
-  char input;
-    std::cin >> input;
+    char input;
+    do
+    {
+        std::cout "Please enter a valid option: ";
+        std::cin >> input;
+    } while (!Validations::isValidChar(input) && !(Validations::IsInMenuRange(input)););
 }
-
-
-
