@@ -24,10 +24,10 @@ class App {
         void ConfirmResults(std::array<double, 4>& results);
 
         // Function to display the results of the investment with monthly deposits
-        void displayResultsWithMonthlyDeposits(const std::vector<std::vector<double>>& resultsWithMonthlyPayments);
+        void displayResultsWithMonthlyDeposits(const std::vector<std::vector<double> >& resultsWithMonthlyPayments);
 
         // Function to display the results of the investment without monthly deposits
-        void displayResultsWithoutMonthlyDeposits(const std::vector<std::vector<double>>& resultsWithoutMonthlyPayments);
+        void displayResultsWithoutMonthlyDeposits(const std::vector<std::vector<double> >& resultsWithoutMonthlyPayments);
 
         // Function to quit the application
         void Quit();

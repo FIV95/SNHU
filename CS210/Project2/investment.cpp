@@ -18,10 +18,10 @@ Investment::Investment(double t_initialInvestment, double t_monthlyDeposit, doub
     this->m_rows = static_cast<int>(this->m_numberOfYears * 12);
 
     // Initialize the 2D vector for results with monthly payments (each row corresponds to a month, and there are 4 columns)
-    this->m_resultsWithMonthlyPayments = std::vector<std::vector<double>>(m_rows, std::vector<double>(COLS));
+    this->m_resultsWithMonthlyPayments = std::vector<std::vector<double> >(m_rows, std::vector<double>(COLS));
 
     // Initialize the 2D vector for results without monthly payments
-    this->m_resultsWithoutMonthlyPayments = std::vector<std::vector<double>>(m_rows, std::vector<double>(COLS));
+    this->m_resultsWithoutMonthlyPayments = std::vector<std::vector<double> >(m_rows, std::vector<double>(COLS));
 
     // Calculate the investment results with monthly deposits
     setInvestmentCalculationsMonthly();
@@ -98,11 +98,11 @@ void Investment::setInvestmentCalculationsWithoutMonthlyDeposits() {
 }
 
 // Getter method to retrieve the vector of results with monthly payments
-std::vector<std::vector<double>> Investment::getResultsWithMonthlyPayments() const {
+std::vector<std::vector<double> > Investment::getResultsWithMonthlyPayments() const {
     return m_resultsWithMonthlyPayments;
 }
 
 // Getter method to retrieve the vector of results without monthly payments
-std::vector<std::vector<double>> Investment::getResultsWithoutMonthlyPayments() const {
+std::vector<std::vector<double> > Investment::getResultsWithoutMonthlyPayments() const {
     return m_resultsWithoutMonthlyPayments;
 }
