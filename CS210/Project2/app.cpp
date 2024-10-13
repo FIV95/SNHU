@@ -71,7 +71,7 @@ void App::PrintMenu() {
 // Function to get user input for the investment data
 std::array<double, 4> App::GetInput() {
     std::string input;
-    double initialInvestment;
+    double initialInvestment = 0.0;
     double monthlyDeposit;
     double annualInterest;
     double numYears;
@@ -162,7 +162,11 @@ std::array<double, 4> App::GetInput() {
     } while (true);
 
     std::cout << std::endl;
-    return {answers[0], answers[1], answers[2], answers[3]};  // Return the user inputs
+    answers[0] = initialInvestment;
+    answers[1] = monthlyDeposit;
+    answers[2] = annualInterest;
+    answers[3] = numYears;
+    return answers;
 }
 
 // Function to display confirmation of user choices
