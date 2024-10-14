@@ -10,47 +10,45 @@
 App::App() : m_running(true) {}
 
 // Function to display results with monthly deposits
-void App::displayResultsWithMonthlyDeposits(const std::vector<std::vector<double> >& resultsWithMonthlyPayments) {
-    std::cout << std::fixed << std::setprecision(2);  // Set the precision for output to 2 decimal places
+void App::displayResultsWithMonthlyDeposits(const std::vector<std::vector<double>>& resultsWithMonthlyPayments) {
+    std::cout << std::fixed << std::setprecision(2);  // Set precision to 2 decimal places
     std::cout << "Results with Monthly Deposits:\n";
-    std::cout << "\tYear\tOpening Amount\t\tDeposited Amount\tTotal\t\tInterest\t\tClosing Balance\n";
+    std::cout << std::setw(8) << "Year" << std::setw(20) << "Opening Amount" << std::setw(20) << "Deposited Amount"
+              << std::setw(20) << "Total" << std::setw(20) << "Interest" << std::setw(20) << "Closing Balance\n";
 
     // Loop through the results for each month
     for (size_t month = 0; month < resultsWithMonthlyPayments.size(); ++month) {
-        // Only display data for each year (every 12 months)
-        if ((month + 1) % 12 == 0) {
-            int year = (month + 1) / 12;  // Calculate the year based on the month index
-            std::cout <<"\t" << year << "\t";
-
-            // Print the results for the current year
-            std::cout << "$" << resultsWithMonthlyPayments[month][0] << "\t\t\t"
-                      << "$" << resultsWithMonthlyPayments[month][1] << "\t\t\t"
-                      << "$" << resultsWithMonthlyPayments[month][2] << "\t\t"
-                      << "$" << resultsWithMonthlyPayments[month][3] << "\t\t\t"
-                      << "$" << resultsWithMonthlyPayments[month][4] << "\n";
+        if ((month + 1) % 12 == 0) {  // Only display data every 12 months
+            int year = (month + 1) / 12;  // Calculate the year
+            std::cout << std::setw(8) << year
+                      << std::setw(20) << resultsWithMonthlyPayments[month][0]
+                      << std::setw(20) << resultsWithMonthlyPayments[month][1]
+                      << std::setw(20) << (resultsWithMonthlyPayments[month][0] + resultsWithMonthlyPayments[month][1])
+                      << std::setw(20) << resultsWithMonthlyPayments[month][3]
+                      << std::setw(20) << resultsWithMonthlyPayments[month][4] << "\n";
         }
     }
     std::cout << "\n\n";
 }
 
 // Function to display results without monthly deposits
-void App::displayResultsWithoutMonthlyDeposits(const std::vector<std::vector<double> >& resultsWithoutMonthlyPayments) {
+// Function to display results without monthly deposits
+void App::displayResultsWithoutMonthlyDeposits(const std::vector<std::vector<double>>& resultsWithoutMonthlyPayments) {
     std::cout << std::fixed << std::setprecision(2);  // Set precision to 2 decimal places
     std::cout << "Results without Monthly Deposits:\n";
-    std::cout << "\tYear\tOpening Amount\t\tDeposited Amount\tTotal\t\tInterest\t\tClosing Balance\n";
+    std::cout << std::setw(8) << "Year" << std::setw(20) << "Opening Amount" << std::setw(20) << "Deposited Amount"
+              << std::setw(20) << "Total" << std::setw(20) << "Interest" << std::setw(20) << "Closing Balance\n";
 
     // Loop through the results for each month
     for (size_t month = 0; month < resultsWithoutMonthlyPayments.size(); ++month) {
         if ((month + 1) % 12 == 0) {  // Only display data every 12 months
             int year = (month + 1) / 12;  // Calculate the year
-            std::cout <<"\t" << year << "\t";
-
-            // Print the results for the current year
-            std::cout << "$" << resultsWithoutMonthlyPayments[month][0] << "\t\t\t"
-                      << "$" << resultsWithoutMonthlyPayments[month][1] << "\t\t\t"
-                      << "$" << resultsWithoutMonthlyPayments[month][2] << "\t\t"
-                      << "$" << resultsWithoutMonthlyPayments[month][3] << "\t\t\t"
-                      << "$" << resultsWithoutMonthlyPayments[month][4] << "\n";
+            std::cout << std::setw(8) << year
+                      << std::setw(20) << resultsWithoutMonthlyPayments[month][0]
+                      << std::setw(20) << resultsWithoutMonthlyPayments[month][1]
+                      << std::setw(20) << (resultsWithoutMonthlyPayments[month][0] + resultsWithoutMonthlyPayments[month][1])
+                      << std::setw(20) << resultsWithoutMonthlyPayments[month][3]
+                      << std::setw(20) << resultsWithoutMonthlyPayments[month][4] << "\n";
         }
     }
     std::cout << "\n\n";

@@ -49,50 +49,40 @@ int Investment::numberOfMonthsConversion(double t_num) {
 
 // Method to calculate the investment results with monthly deposits
 void Investment::setInvestmentCalculationsMonthly() {
-    double openingBalance = m_initialInvestment;  // Start with the initial investment as the opening balance
-    double closingBalance = 0.0;  // To store the closing balance for each month
-    double interest = 0.0;  // To store the interest calculated for each month
+    double openingBalance = m_initialInvestment;
+    double closingBalance = 0.0;
+    double interest = 0.0;
 
-    // Loop through each month (total number of months is m_rows)
     for (int i = 0; i < m_rows; ++i) {
-        // Calculate the interest for the current month
         interest = (openingBalance + m_monthlyDeposit) * m_annualInterestConverted;
-
-        // Calculate the closing balance by adding deposit and interest to the opening balance
         closingBalance = openingBalance + m_monthlyDeposit + interest;
 
-        // Store the calculated values in the corresponding columns of the 2D vector
-        m_resultsWithMonthlyPayments[i][0] = openingBalance;  // Opening balance
-        m_resultsWithMonthlyPayments[i][1] = m_monthlyDeposit;  // Monthly deposit
-        m_resultsWithMonthlyPayments[i][2] = interest;  // Interest earned
-        m_resultsWithMonthlyPayments[i][3] = closingBalance;  // Closing balance
+        m_resultsWithMonthlyPayments[i][0] = openingBalance;
+        m_resultsWithMonthlyPayments[i][1] = m_monthlyDeposit;
+        m_resultsWithMonthlyPayments[i][2] = openingBalance + m_monthlyDeposit; // Total
+        m_resultsWithMonthlyPayments[i][3] = interest;
+        m_resultsWithMonthlyPayments[i][4] = closingBalance;
 
-        // Set the closing balance as the opening balance for the next month
         openingBalance = closingBalance;
     }
 }
 
 // Method to calculate the investment results without monthly deposits
 void Investment::setInvestmentCalculationsWithoutMonthlyDeposits() {
-    double openingBalance = m_initialInvestment;  // Start with the initial investment as the opening balance
-    double closingBalance = 0.0;  // To store the closing balance for each month
-    double interest = 0.0;  // To store the interest calculated for each month
+    double openingBalance = m_initialInvestment;
+    double closingBalance = 0.0;
+    double interest = 0.0;
 
-    // Loop through each month (total number of months is m_rows)
     for (int i = 0; i < m_rows; ++i) {
-        // Calculate the interest for the current month based only on the opening balance (no deposit)
         interest = openingBalance * m_annualInterestConverted;
-
-        // Calculate the closing balance by adding interest to the opening balance
         closingBalance = openingBalance + interest;
 
-        // Store the calculated values in the corresponding columns of the 2D vector
-        m_resultsWithoutMonthlyPayments[i][0] = openingBalance;  // Opening balance
-        m_resultsWithoutMonthlyPayments[i][1] = 0.0;  // No monthly deposit
-        m_resultsWithoutMonthlyPayments[i][2] = interest;  // Interest earned
-        m_resultsWithoutMonthlyPayments[i][3] = closingBalance;  // Closing balance
+        m_resultsWithoutMonthlyPayments[i][0] = openingBalance;
+        m_resultsWithoutMonthlyPayments[i][1] = 0.0;
+        m_resultsWithoutMonthlyPayments[i][2] = openingBalance; // Total
+        m_resultsWithoutMonthlyPayments[i][3] = interest;
+        m_resultsWithoutMonthlyPayments[i][4] = closingBalance;
 
-        // Set the closing balance as the opening balance for the next month
         openingBalance = closingBalance;
     }
 }
