@@ -2,21 +2,21 @@
 #define PRODUCT_H
 
 #include <string>
-#include <vector>
 
-class Product
-{
-  private:
-    std::string _name; // Prefixing with _ for private member
+class Product {
+private:
+    std::string _name;
     int _qty;
 
-  public:
+public:
     Product();
-    Product(std::string name, int qty);
-    std::string getName() const { return _name; }
-    void setName(std::string name);
-    int getQty() const { return _qty; }
+    Product(const std::string &name, int qty); // Parameterized constructor
+
+    void setName(const std::string &name);
     void setQty(int qty);
+
+    std::string getName() const { return _name; }
+    int getQty() const { return _qty; }
 };
 
 #endif // PRODUCT_H

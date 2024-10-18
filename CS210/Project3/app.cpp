@@ -94,3 +94,14 @@ void App::promptForQueryComplete() {
 void App::setOption1Results(int result) {
     this->_option1Results = result;
 }
+
+void App::printOption1Results(std::string query) {
+    std::cout << "The query " << query << " appears " << this->getOption1Results() << " times." << std::endl;
+}
+
+void App::printOption2Results(std::vector<Product> products) {
+    std::cout << "Option 2 results: " << std::endl;
+    for (const auto &product : products) {
+        std::cout << "Product: " << product.getName() << " Quantity: " << product.getQty() << std::endl;
+    }
+}

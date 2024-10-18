@@ -28,6 +28,7 @@ int main()
             inputDocument->setTitle(path);
             app.setCurrentDocument(inputDocument);
             app.setHasDocument(true);
+            DocumentProcessor::readDocument(app.getCurrentDocument());
 
         }
         if (app.getInput() == '2')
@@ -39,12 +40,12 @@ int main()
                 continue;
             }
             // FIX ME implement option 2
-            DocumentProcessor::readDocument(app.getCurrentDocument());
             do
             {
             app.promptForQuery();
             app.setOption1Results(DocumentProcessor::calculateOption1(app.getQuery(), app.getCurrentDocument()));
-            std::cout << "The query " << app.getQuery() << " appears " << app.getOption1Results() << " times." << std::endl;
+            app.printOption1Results(app.getQuery());
+            app.promptForQueryComplete();
             }
             while (!app.getQueryComplete());
 
@@ -57,7 +58,8 @@ int main()
                 std::cout << "No document loaded. Please load a document first." << std::endl;
                 continue;
             }
-            // FIX ME implement option 3
+            app.printOption2Results(app.getCurrentDocument()->getVectorContent());
+
         }
         if (app.getInput() == '4')
         {

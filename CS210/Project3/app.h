@@ -52,6 +52,7 @@ public:
     bool getQueryComplete() const { return this->_queryComplete; }
     int getOption1Results() const { return this->_option1Results; }
     void setOption1Results(int result);
+    std::vector<Product> getOption2Results() const { return this->_currentDocument->getVectorContent(); }
 };
 
 #endif // APP_H

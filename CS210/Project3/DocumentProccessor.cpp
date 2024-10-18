@@ -22,7 +22,7 @@ void DocumentProcessor::readDocument(InputDocument* inputDocument)
     while (!file.fail())
     {
         // Further logic for reading document...
-        if (documentHashTableContent.find(line) != documentHashTableContent.end() )
+        if (documentHashTableContent.find(line) == documentHashTableContent.end() )
         {
             documentHashTableContent[line] = 1;
         }
@@ -31,6 +31,7 @@ void DocumentProcessor::readDocument(InputDocument* inputDocument)
             documentHashTableContent[line] = documentHashTableContent[line] + 1;
         }
         file >> line;
+    }
         if (!file.eof())
         {
             std::cout << "Input failure before reaching end of file." << std::endl;
@@ -45,7 +46,6 @@ void DocumentProcessor::readDocument(InputDocument* inputDocument)
             documentVectorContent.push_back(product);
         }
 
-    }
     file.close();
     inputDocument->setVectorContent(documentVectorContent);
     inputDocument->setHashTableContent(documentHashTableContent);
