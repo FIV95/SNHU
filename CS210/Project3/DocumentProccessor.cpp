@@ -52,7 +52,7 @@ void DocumentProcessor::readDocument(InputDocument* inputDocument)
     return;
 }
 
-int DocumentProcessor::setOption1(std::string query, InputDocument* InputDocument)
+int DocumentProcessor::calculateOption1(std::string query, InputDocument* InputDocument)
 {
     std::unordered_map<std::string, int> documentHashTableContent = InputDocument->getHashTableContent();
     if (documentHashTableContent.find(query) != documentHashTableContent.end())

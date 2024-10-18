@@ -53,3 +53,8 @@ std::unordered_map<std::string, int> InputDocument::getHashTableContent() const 
     return this->_hashTable;
 }
 
+// Override setHashTableContent
+void InputDocument::setHashTableContent(const std::unordered_map<std::string, int> hashTable) {
+    this->_hashTable = hashTable;
+}
+

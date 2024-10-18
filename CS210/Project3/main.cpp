@@ -43,7 +43,7 @@ int main()
             do
             {
             app.promptForQuery();
-            app.setOption1Results(DocumentProcessor::setOption1(app.getQuery(), app.getCurrentDocument()));
+            app.setOption1Results(DocumentProcessor::calculateOption1(app.getQuery(), app.getCurrentDocument()));
             std::cout << "The query " << app.getQuery() << " appears " << app.getOption1Results() << " times." << std::endl;
             }
             while (!app.getQueryComplete());
