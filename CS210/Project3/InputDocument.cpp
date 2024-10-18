@@ -39,12 +39,17 @@ void InputDocument::setPath(const std::string &path) {
 }
 
 // Override getContent
-std::vector<Product> InputDocument::getContent() const {
+std::vector<Product> InputDocument::getVectorContent() const {
     return this->_products;
 }
 
 // Override setContent
-void InputDocument::setContent(const std::vector<Product> &products) {
+void InputDocument::setVectorContent(const std::vector<Product> &products) {
     this->_products = products;
+}
+
+// Override getHashTableContent
+std::unordered_map<std::string, int> InputDocument::getHashTableContent() const {
+    return this->_hashTable;
 }
 

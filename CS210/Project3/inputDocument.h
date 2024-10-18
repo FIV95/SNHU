@@ -11,6 +11,8 @@ class InputDocument : public Document
 {
   private:
     int _osType;
+    std::vector<Product> _products;
+    std::unordered_map<std::string, int> _hashTable;
   public:
     InputDocument();
     InputDocument(std::string path, int osType);
