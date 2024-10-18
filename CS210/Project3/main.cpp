@@ -29,6 +29,7 @@ int main()
             app.setCurrentDocument(inputDocument);
             app.setHasDocument(true);
             DocumentProcessor::readDocument(app.getCurrentDocument());
+            OutputDocument* outputDocument = new OutputDocument(path + "frequency.dat");
 
         }
         if (app.getInput() == '2')

@@ -102,6 +102,6 @@ void App::printOption1Results(std::string query) {
 void App::printOption2Results(std::vector<Product> products) {
     std::cout << "Option 2 results: " << std::endl;
     for (const auto &product : products) {
-        std::cout << "Product: " << product.getName() << " Quantity: " << product.getQty() << std::endl;
+        std::cout << "Product: " << product.getName() << "|| Quantity: " << product.getQty() << std::endl;
     }
 }
