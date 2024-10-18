@@ -1,5 +1,5 @@
 #include "documentProccessor.h"
-#include "InputDocument.h"
+#include "inputDocument.h"
 #include <iostream>
 #include <iomanip>
 #include <string>

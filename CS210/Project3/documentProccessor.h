@@ -3,9 +3,9 @@
 
 #include <string>
 #include <vector>
-#include "InputDocument.h"
-#include "OutputDocument.h"
-#include "Product.h"
+#include "inputDocument.h"
+#include "outputDocument.h"
+#include "product.h"
 
 class DocumentProcessor
 {
