@@ -15,7 +15,7 @@ This project is an item-tracking program for the Corner Grocer. It analyzes text
 
 The UML diagram illustrates the structure of the program, including the relationships between classes such as `App`, `Document`, `Product`, and utility classes for validation and processing.
 
-![UML Diagram](Lawrene_Francis_Project3_UML.png)
+![UML Diagram](Lawrence_Francis_Project3_UML.png)
 
 ## Classes
 
