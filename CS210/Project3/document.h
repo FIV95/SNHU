@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "product.h"
+#include <unordered_map>
 
 class Document {
 protected:
@@ -20,8 +21,10 @@ public:
     virtual void setTitle(const std::string &title) = 0;
     virtual void setPath(const std::string &path) = 0;
 
-    virtual std::vector<Product> getContent() const = 0;
-    virtual void setContent(const std::vector<Product> &products) = 0;
+    virtual std::vector<Product> getVectorContent() const = 0;
+    virtual std::unordered_map<std::string, int> getHashTableContent() const = 0;
+    virtual void setVectorContent(const std::vector<Product> &products) = 0;
+    virtual void setHashTableContent(const std::unordered_map<std::string, int>) = 0;
 };
 
 #endif // DOCUMENT_H

@@ -2,6 +2,7 @@
 #include "validation.h"
 #include "inputDocument.h"
 #include "outputDocument.h"
+#include "documentProccessor.h"
 #include <iostream>
 
 int main()
@@ -38,6 +39,14 @@ int main()
                 continue;
             }
             // FIX ME implement option 2
+            DocumentProcessor::readDocument(app.getCurrentDocument());
+            do
+            {
+            app.promptForQuery();
+            app.setOption1Results(DocumentProcessor::setOption1(app.getQuery(), app.getCurrentDocument()));
+            }
+            while (!app.getQueryComplete());
+
         }
         if (app.getInput() == '3')
         {

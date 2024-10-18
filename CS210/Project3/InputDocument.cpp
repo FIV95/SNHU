@@ -47,3 +47,4 @@ std::vector<Product> InputDocument::getContent() const {
 void InputDocument::setContent(const std::vector<Product> &products) {
     this->_products = products;
 }
+

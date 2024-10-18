@@ -5,6 +5,7 @@
 #include <vector>
 #include "document.h"
 #include "product.h"
+#include <unordered_map>
 
 class InputDocument : public Document
 {
@@ -19,8 +20,11 @@ class InputDocument : public Document
     void setTitle(const std::string &title) override;
     void setPath(const std::string &path) override;
 
-    std::vector<Product> getContent() const override;
-    void setContent(const std::vector<Product> &products) override;
+    std::vector<Product> getVectorContent() const override;
+    std::unordered_map<std::string, int> getHashTableContent() const override;
+
+    void setVectorContent(const std::vector<Product> &products) override;
+    void setHashTableContent(const std::unordered_map<std::string, int>) override;
     void setOsType(int osType) { this->_osType = osType; }
     int getOsType() const { return this->_osType; }
 };

@@ -9,6 +9,7 @@
 App::App() {
     this->_running = true;
     this->_hasDocument = false;
+    this->_queryComplete = false;
     this->setOsType(Validation::osCheck());
 }
 
@@ -43,6 +44,14 @@ void App::setInput(const char &input) {
     this->_input = input;
 }
 
+// define promptForQuery method
+void App::promptForQuery() {
+    std::string query;
+    std::cout << "Please enter the query: ";
+    std::cin >> query;
+    setQuery(query);
+}
+
 // Define the method to prompt for input from the user
 void App::promptForInput() {
     char input;
@@ -63,4 +72,25 @@ void App::setHasDocument(bool hasDocument) {
 
 void App::setRunning(bool running) {
     this->_running = running;
+}
+
+void App::setQuery(const std::string &query) {
+    this->_query = query;
+}
+
+void App::setQueryComplete(bool queryComplete) {
+    this->_queryComplete = queryComplete;
+}
+
+void App::promptForQueryComplete() {
+    char input;
+    do {
+        std::cout << "Want to search for something else? (Y/N): ";
+        std::cin >> input;
+    } while (!Validation::isValidChar(std::string(1, input)));
+    setQueryComplete(input == 'N' || input == 'n');
+}
+
+void App::setOption1Results(int result) {
+    this->_option1Results = result;
 }

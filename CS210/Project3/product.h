@@ -11,6 +11,7 @@ class Product
     int _qty;
 
   public:
+    Product();
     Product(std::string name, int qty);
     std::string getName() const { return _name; }
     void setName(std::string name);

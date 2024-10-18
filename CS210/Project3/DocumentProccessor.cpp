@@ -1,24 +1,66 @@
-#include "DocumentProcessor.h"
+#include "documentProccessor.h"
 #include "InputDocument.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
 #include <vector>
-#include <filesystem>
 #include <array>
+#include <fstream>
+#include <unordered_map>
 
-// Constructor
-DocumentProcessor::DocumentProcessor(InputDocument &currentDocument) : _currentDocument(currentDocument)
+std::ifstream file;
+
+void DocumentProcessor::readDocument(InputDocument* inputDocument)
 {
+    // hash table to hold <string, int> pairs
+    std::unordered_map<std::string, int> documentHashTableContent;
+    // Declare variable for the document content
+    std::vector<Product> documentVectorContent;
+    std::string line;
+    file.open(inputDocument->getPath());
+    file >> line;
+    while (!file.fail())
+    {
+        // Further logic for reading document...
+        if (documentHashTableContent.find(line) != documentHashTableContent.end() )
+        {
+            documentHashTableContent[line] = 1;
+        }
+        else
+        {
+            documentHashTableContent[line] = documentHashTableContent[line] + 1;
+        }
+        file >> line;
+        if (!file.eof())
+        {
+            std::cout << "Input failure before reaching end of file." << std::endl;
+        }
+        // now that we have our hashtable / frequency chart we can populate our Product Vector
+        for (const auto& pair : documentHashTableContent)
+        {
+            std::string name = pair.first;
+            int qty = pair.second;
+            Product product(name, qty);
+            // push new product into our vector of Products
+            documentVectorContent.push_back(product);
+        }
+
+    }
+    file.close();
+    inputDocument->setVectorContent(documentVectorContent);
+    inputDocument->setHashTableContent(documentHashTableContent);
+    return;
 }
 
-std::string DocumentProcessor::setOption1(std::string query)
+int DocumentProcessor::setOption1(std::string query, InputDocument* InputDocument)
 {
-    std::string result = "";
-
-    // Declare variable for the document content
-    std::vector<Product> documentContent = _currentDocument.getContent();
-
-    // Further logic for processing query...
-    return result;
+    std::unordered_map<std::string, int> documentHashTableContent = InputDocument->getHashTableContent();
+    if (documentHashTableContent.find(query) != documentHashTableContent.end())
+    {
+        return documentHashTableContent[query];
+    }
+    else
+    {
+        return 0;
+    }
 }

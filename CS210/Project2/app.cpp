@@ -10,7 +10,7 @@
 App::App() : m_running(true) {}
 
 // Function to display results with monthly deposits
-void App::displayResultsWithMonthlyDeposits(const std::vector<std::vector<double>>& resultsWithMonthlyPayments) {
+void App::displayResultsWithMonthlyDeposits(const std::vector<std::vector<double> >& resultsWithMonthlyPayments) {
     std::cout << std::fixed << std::setprecision(2);  // Set precision to 2 decimal places
     std::cout << "Results with Monthly Deposits:\n";
     std::cout << std::setw(8) << "Year" << std::setw(20) << "Opening Amount" << std::setw(20) << "Deposited Amount"
@@ -33,7 +33,7 @@ void App::displayResultsWithMonthlyDeposits(const std::vector<std::vector<double
 
 // Function to display results without monthly deposits
 // Function to display results without monthly deposits
-void App::displayResultsWithoutMonthlyDeposits(const std::vector<std::vector<double>>& resultsWithoutMonthlyPayments) {
+void App::displayResultsWithoutMonthlyDeposits(const std::vector<std::vector<double> >& resultsWithoutMonthlyPayments) {
     std::cout << std::fixed << std::setprecision(2);  // Set precision to 2 decimal places
     std::cout << "Results without Monthly Deposits:\n";
     std::cout << std::setw(8) << "Year" << std::setw(20) << "Opening Amount" << std::setw(20) << "Deposited Amount"
