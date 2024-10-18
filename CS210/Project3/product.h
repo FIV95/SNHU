@@ -1,4 +1,4 @@
-#ifdef PRODUCT_H
+#ifndef PRODUCT_H
 #define PRODUCT_H
 
 #include <string>
@@ -7,13 +7,15 @@
 class Product
 {
   private:
-  std::string name;
-  int qty;
+    std::string _name; // Prefixing with _ for private member
+    int _qty;
 
   public:
-  Product(std::string name, int frequency);
-  std::string getName() const {return this->name;}
-  void setName(std::string name);
-  int getFrequency() const {return this->frequency;}
-  void setFrequency(int frequency);
+    Product(std::string name, int qty);
+    std::string getName() const { return _name; }
+    void setName(std::string name);
+    int getQty() const { return _qty; }
+    void setQty(int qty);
 };
+
+#endif // PRODUCT_H

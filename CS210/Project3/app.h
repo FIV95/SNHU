@@ -3,48 +3,44 @@
 
 #include <string>
 #include <vector>
-#include "InputDocument.h" 
+#include "inputDocument.h"
+#include "outputDocument.h"
+#include "product.h"
 
-class InputDocument;
-class OutputDocument;
-class Product;
+class App {
+private:
+    bool _running;
+    bool _hasDocument;
+    char _input; // Declare _input here
+    InputDocument* _currentDocument;
+    int _osType;
 
-class App
-{
-  private:
-  bool running = true;
-  bool hasDocument = false;
-  char input;
-  int osType;
-  InputDocument currentDocument;
-  std::string option1Results;
+public:
+    App();
 
-  public:
+    // Print methods
+    void printMenu();
+    void printOption1Results(std::string query);
+    void printOption2Results(std::vector<Product> products);
+    void printOption3Results(std::vector<Product> products);
 
-  // print methods
-  void printMenu();
-  void printOption1Results(std::string query);
-  void printOption2Results(std::vector<Product> products);
-  void printOption3Results(std::vector<Product> products);
 
-  // result 1 methods
-  std::string calculateOption1(std::string query);
-  void setOption1Results(std::string result);
-  std::string getOption1Results() {return this->option1Results;}
+    // Document related methods
+    InputDocument* getCurrentDocument() const { return this->_currentDocument; }
+    void setCurrentDocument(InputDocument* inputDocument);
+    bool hasDocument() const { return this->_hasDocument; }
+    void setHasDocument(bool hasDocument);
 
-  // document related methods
-  InputDocument getCurrentDocument() const {return this->currentDocument;}
-  void setCurrentDocument(std::string path);
-  bool hasDocument() const {return this->hasDocument;}
-  void setHasDocument(bool hasDocument);
+    OutputDocument createOutputDocument(std::vector<Product>);
 
-  OutputDocument createOutputDocument(std::vector<Product>);
+    char getInput() const { return this->_input; } // Declare getInput method
+    void setInput(const char &input); // Declare setInput method
+    bool isRunning() const { return this->_running; }
+    void setRunning(bool running);
+    void setOsType(int osType) { this->_osType = osType; }
+    int getOsType() const { return this->_osType; }
 
-  char getInput() const {return this->input;}
-  void setInput(char input);
-  bool isRunning() const {return this->running;}
-  void setRunning(bool);
-  
+    void promptForInput(); // Declare the method to prompt for input from the user
 };
 
-#endif
+#endif // APP_H

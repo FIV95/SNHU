@@ -3,22 +3,19 @@
 #include <iomanip>
 #include <string>
 #include <vector>
-#include "Validations.h"
+#include "validation.h"
 
-// print methods
-
-// constructor
-App::App()
-{
-    this->running = true;
-    this->hasDocument = false;
-    this->osType = Validations::osCheck();
+// Constructor
+App::App() {
+    this->_running = true;
+    this->_hasDocument = false;
+    this->setOsType(Validation::osCheck());
 }
 
-void printMenu()
-{
+void App::printMenu() {
     std::cout << std::setfill('=') << std::setw(45) << "=" << std::endl;
-    std::cout << "MENU" << std::endl;
+    std::cout << "MENU";
+    std::cout << (this->hasDocument() ? "-- Document Loaded: '" + this->getCurrentDocument()->getTitle() + "'" : "") << std::endl;
     std::cout << std::setfill('=') << std::setw(45) << "=" << std::endl;
 
     std::cout << "Please select an option by typing the corresponding number:" << std::endl;
@@ -41,14 +38,29 @@ void printMenu()
     std::cout << std::setfill('=') << std::setw(45) << "=" << std::endl;
 }
 
-// Procedurial methods
+// Define setInput method
+void App::setInput(const char &input) {
+    this->_input = input;
+}
 
-void getInput()
-{
+// Define the method to prompt for input from the user
+void App::promptForInput() {
     char input;
-    do
-    {
-        std::cout "Please enter a valid option: ";
+    do {
+        std::cout << "Please enter a valid option: ";
         std::cin >> input;
-    } while (!Validations::isValidChar(input) && !(Validations::IsInMenuRange(input)););
+    } while (!Validation::isValidChar(std::string(1, input)) || !Validation::intIsInMenuRange(std::string(1, input)));
+    setInput(input); // Set the input after validation
+}
+
+void App::setCurrentDocument(InputDocument* inputDocument) {
+    this->_currentDocument = inputDocument;
+}
+
+void App::setHasDocument(bool hasDocument) {
+    this->_hasDocument = hasDocument;
+}
+
+void App::setRunning(bool running) {
+    this->_running = running;
 }

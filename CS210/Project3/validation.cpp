@@ -6,6 +6,8 @@
 #include <filesystem>
 #include <array>
 
+namespace fs = std::__fs::filesystem;
+
 bool Validation::isValidInt(const std::string &input)
 {
     std::istringstream iss(input);
@@ -27,70 +29,66 @@ bool Validation::isValidChar(const std::string &input)
     }
 }
 
-        bool Validation::intIsInMenuRange(const std::string &input)
+bool Validation::intIsInMenuRange(const std::string &input)
+{
+    try
+    {
+        int i = std::stoi(input);
+        if (i >= 1 && i <= 5)
         {
-            try
-            {
-                int i = std::stoi(input);
-                if (i >= 1 && i <= 5)
-                {
-                    return true;
-                }
-                else
-                {
-                    std::cout << "The number provided is out of the valid range (1-5)" << std::endl;
-                    return false;
-                }
-            }
-            catch (const std::invalid_argument &e)
-            {
-                std::cout << "The input provided is not a number" << std::endl;
-                return false;
-            }
-            catch (const std::out_of_range &e)
-            {
-                std::cout << "The number provided is out of range" << std::endl;
-                return false;
-            }
-        }
-
-        bool Validation::isWindowsOS()
-        {
-#if defined(_WIN32) || defined(_WIN64)
             return true;
-#else
+        }
+        else
+        {
+            std::cout << "The number provided is out of the valid range (1-5)" << std::endl;
             return false;
-#endif
         }
+    }
+    catch (const std::invalid_argument &e)
+    {
+        std::cout << "The input provided is not a number" << std::endl;
+        return false;
+    }
+    catch (const std::out_of_range &e)
+    {
+        std::cout << "The number provided is out of range" << std::endl;
+        return false;
+    }
+}
 
-        bool Validation::isUnixBasedOS()
-        {
-#if (defined(__unix__) || defined(__unix) || defined(__linux__) || defined(__linux) || defined(__APPLE__))
-            {
-                return true;
-            }
+int Validation::osCheck()
+{
+#if defined(_WIN32) || defined(_WIN64)
+    return 1; // Windows
+#elif defined(__unix__) || defined(__unix) || defined(__linux__) || defined(__APPLE__)
+    return 2; // Unix-based
 #else
-            {
-                return false;
+    return 0; // Unknown
 #endif
-        }
-        bool Validation::isValidWindowsPath(const std::string &input)
-        {
-            // check if the path is valid
-        }
+}
 
-        int Validation::osCheck()
-        {
-            if (Validation::isWindowsOS())
-            {
-                return 1;
-            }
-            else if (Validation::isUnixBasedOS())
-            {
-                return 0;
-            }
-            else
-            {
-                return -1;
-            }
+bool Validation::isValidWindowsPath(const std::string &input) {
+ // FIX ME - Implement the validation for Windows paths
+    return true;
+}
+
+bool Validation::isValidUnixPath(const std::string &input) {
+ // FIX ME - Implement the validation for Unix paths
+    return true;
+}
+
+bool Validation::isValidPath(const std::string &input) {
+
+    if (fs::exists(input)) {
+        if (fs::is_regular_file(input)) {
+            return true;
         }
+        else {
+            std::cout << "The path provided does not return a regular file type." << std::endl;
+            return false;
+        }
+    } else {
+        std::cout << "The path provided does not exist" << std::endl;
+        return false;
+    }
+}

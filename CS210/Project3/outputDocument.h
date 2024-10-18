@@ -9,13 +9,16 @@
 class OutputDocument : public Document
 {
   public:
-    OutputDocument(std::string path, int osType);
+    OutputDocument(std::string path);
 
-    std::string getDocumentTitle() const override;
-    void setDocumentTitle(const std::string &title) override;
+    std::string getTitle() const override;
+    std::string getPath() const override;
 
-    std::vector<Product> getDocumentContent() const override;
-    void setDocumentContent(const std::vector<Product> &products) override;
+    void setPath(const std::string &path) override;
+    void setTitle(const std::string &title) override;
+
+    std::vector<Product> getContent() const override;
+    void setContent(const std::vector<Product> &products) override;
 
     void sortProductsByName(std::vector<Product> &products);
     void sortProductsByQtyFrequency(std::vector<Product> &products);

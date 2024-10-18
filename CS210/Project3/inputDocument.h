@@ -8,14 +8,21 @@
 
 class InputDocument : public Document
 {
+  private:
+    int _osType;
   public:
+    InputDocument();
     InputDocument(std::string path, int osType);
 
-    std::string getDocumentTitle() const override;
-    void setDocumentTitle(const std::string &title) override;
+    std::string getTitle() const override;
+    std::string getPath() const override;
+    void setTitle(const std::string &title) override;
+    void setPath(const std::string &path) override;
 
-    std::vector<Product> getDocumentContent() const override;
-    void setDocumentContent(const std::vector<Product> &products) override;
+    std::vector<Product> getContent() const override;
+    void setContent(const std::vector<Product> &products) override;
+    void setOsType(int osType) { this->_osType = osType; }
+    int getOsType() const { return this->_osType; }
 };
 
 #endif // INPUTDOCUMENT_H

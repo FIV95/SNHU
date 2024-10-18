@@ -4,19 +4,16 @@
 #include <string>
 #include <sstream>
 
-
 class Validation
 {
   public:
-  bool intIsInMenuRange(const std::string &input);
-  bool isValidChar(const std::string &input);
-  bool isValidInt(const std::string &input);
-  bool isWindowsOS();
-  bool isUnixBasedOS();
-  bool isValidWindowsPath(const std::string &input);
-  bool isValidUnixPath(const std::string &input);
-  int osCheck();
-  
+    static bool intIsInMenuRange(const std::string &input);
+    static bool isValidChar(const std::string &input);
+    static bool isValidInt(const std::string &input);
+    static bool isValidWindowsPath(const std::string &input);
+    static bool isValidUnixPath(const std::string &input);
+    static bool isValidPath(const std::string &input);
+    static int osCheck();
 };
 
-#endif
+#endif // VALIDATION_H
