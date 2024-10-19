@@ -16,7 +16,7 @@ App::App() {
 void App::printMenu() {
     std::cout << std::setfill('=') << std::setw(45) << "=" << std::endl;
     std::cout << "MENU";
-    std::cout << (this->hasDocument() ? "-- Document Loaded: '" + this->getCurrentDocument()->getTitle() + "'" : "") << std::endl;
+    std::cout << (this->hasDocument() ? " -- Document Loaded: '" + this->getCurrentDocument()->getTitle() + "'" : "") << std::endl;
     std::cout << std::setfill('=') << std::setw(45) << "=" << std::endl;
 
     std::cout << "Please select an option by typing the corresponding number:" << std::endl;
@@ -102,6 +102,6 @@ void App::printOption1Results(std::string query) {
 void App::printOption2Results(std::vector<Product> products) {
     std::cout << "Option 2 results: " << std::endl;
     for (const auto &product : products) {
-        std::cout << "Product: " << product.getName() << "|| Quantity: " << product.getQty() << std::endl;
+        std::cout << "Product: " << product.getName() << " || Quantity: " << product.getQty() << std::endl;
     }
 }

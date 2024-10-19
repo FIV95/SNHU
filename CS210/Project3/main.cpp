@@ -29,7 +29,9 @@ int main()
             app.setCurrentDocument(inputDocument);
             app.setHasDocument(true);
             DocumentProcessor::readDocument(app.getCurrentDocument());
-            OutputDocument* outputDocument = new OutputDocument(path + "frequency.dat");
+            OutputDocument* outputDocument = new OutputDocument(path, app.getOsType(), app.getCurrentDocument()->getVectorContent());
+            outputDocument->createBackup();
+            
 
         }
         if (app.getInput() == '2')
