@@ -1,32 +1,66 @@
 # Corner Grocer Item-Tracking Program
+## Table of Contents
 
-This project is an item-tracking program for the Corner Grocer. It analyzes text records of items purchased throughout the day to help the store rearrange its produce section based on item frequency.
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [UML Diagram](#uml-diagram)
+4. [Classes](#classes)
+   - [App](#app)
+   - [Document](#document)
+   - [InputDocument](#inputdocument)
+   - [OutputDocument](#outputdocument)
+   - [Product](#product)
+   - [Validation](#validation)
+   - [DocumentProcessor](#documentprocessor)
+5. [Usage](#usage)
+   - [Setting Up](#setting-up)
+   - [Running the Program](#running-the-program)
+   - [Menu Options](#menu-options)
+6. [Code Structure](#code-structure)
+7. [Compilation and Execution](#compilation-and-execution)
+8. [Testing](#testing)
+
+## Introduction
+
+This project is designed to handle document-related operations, including reading item purchase records, processing them, and generating output documents with sorted product data.
 
 ## Features
 
-- **Set Input File Path**: Allows the user to specify the file path for the input file containing purchase records.
-- **Search for an Item**: Prompts the user to input an item name and returns the frequency of that specific item.
-- **Print Frequency of All Items**: Prints a list with the frequency of all items purchased.
-- **Print Histogram of Item Frequencies**: Displays the item frequency information as a histogram for easy visualization.
-- **Backup Frequency Results**: Saves the frequency results in an output `.dat` file for backup purposes.
-- **Exit the Program**: Provides the option to exit the application gracefully.
+- Read and process input documents containing item purchase records.
+- Generate output documents with sorted product data.
+- Validate user input and file paths.
+- Provide a user-friendly menu for interacting with the program.
 
 ## UML Diagram
 
-The UML diagram illustrates the structure of the program, including the relationships between classes such as `App`, `Document`, `Product`, and utility classes for validation and processing.
-
-![UML Diagram](Lawrence_Francis_Project3_UML.png)
+![UML Diagram](path/to/uml-diagram.png)
 
 ## Classes
 
 ### `App`
 
-- Manages the overall application flow. This class is responsible for:
-  - Displaying menus.
-  - Handling user input.
-  - Interacting with the documents and controlling the program's execution.
-- It interacts with both `InputDocument` (for reading data) and `OutputDocument` (for writing and sorting data).
-- It also utilizes static methods from the `Validation` and `DocumentProcessor` classes to validate user input and process document data.
+- Manages the overall application flow and user interactions.
+- Attributes:
+  - `_running`: Indicates whether the application is running.
+  - `_hasDocument`: Indicates whether a document is loaded.
+  - `_currentDocument`: Pointer to the currently loaded document.
+  - `_input`: Stores user input.
+  - `_option1Results`: Stores results for option 1.
+- Methods:
+  - `printMenu()`: Displays the main menu.
+  - `setInput(const char &input)`: Sets the user input.
+  - `promptForQuery()`: Prompts the user for a query.
+  - `promptForInput()`: Prompts the user for input.
+  - `setCurrentDocument(InputDocument* inputDocument)`: Sets the current document.
+  - `setHasDocument(bool hasDocument)`: Sets the document loaded status.
+  - `setRunning(bool running)`: Sets the running status.
+  - `setQuery(const std::string &query)`: Sets the query.
+  - `setQueryComplete(bool queryComplete)`: Sets the query completion status.
+  - `promptForQueryComplete()`: Prompts the user for query completion.
+  - `setOption1Results(int result)`: Sets the results for option 1.
+  - `printOption1Results(std::string query)`: Prints the results for option 1.
+  - `printOption2Results(std::vector<Product> products)`: Prints the results for option 2.
+  - `printOption3Results(std::vector<Product> products)`: Prints the results for option 3.
 
 ### `Document`
 
@@ -70,4 +104,25 @@ The UML diagram illustrates the structure of the program, including the relation
   - `calculateOption1()`: Processes a query by calculating the frequency of a specific item from an `InputDocument`.
   - `readDocument()`: Reads the content of an `InputDocument`.
   - `setOption2()` and `setOption3()`: Generate specific sets of `Product` data for different program options.
+
+## Usage
+
+### Setting Up
+
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Ensure you have the necessary dependencies installed.
+
+### Running the Program
+
+1. Compile the project using the provided `Makefile`.
+2. Run the executable.
+
+### Menu Options
+
+1. **Set input file path**: Allow the user to specify the file path for the input file.
+2. **Search for an item**: Prompt a user to input the item, or word, they wish to look for. Return a numeric value for the frequency of the specific word.
+3. **Print frequency of all items**: Print the list with numbers that represent the frequency of all items purchased.
+4. **Print histogram of item frequencies**: Print the same frequency information for all the items in the form of a histogram.
+5. **Exit the program**: Exit the application.
 
