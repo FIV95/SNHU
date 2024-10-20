@@ -105,20 +105,6 @@ This project is designed to handle document-related operations, including readin
   - `readDocument()`: Reads the content of an `InputDocument`.
   - `setOption2()` and `setOption3()`: Generate specific sets of `Product` data for different program options.
 
-## Usage
-
-### Setting Up
-
-1. Clone the repository.
-2. Navigate to the project directory.
-3. Ensure you have the necessary dependencies installed.
-
-### Running the Program
-
-1. Compile the project using the provided `Makefile`.
-2. Run the executable.
-
-### Menu Options
 
 1. **Set input file path**: Allow the user to specify the file path for the input file.
 2. **Search for an item**: Prompt a user to input the item, or word, they wish to look for. Return a numeric value for the frequency of the specific word.
