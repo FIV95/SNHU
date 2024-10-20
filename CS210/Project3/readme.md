@@ -71,8 +71,3 @@ The UML diagram illustrates the structure of the program, including the relation
   - `readDocument()`: Reads the content of an `InputDocument`.
   - `setOption2()` and `setOption3()`: Generate specific sets of `Product` data for different program options.
 
-## Future Enhancements
-
-- **Enhanced Sorting**: Additional sorting criteria for products.
-- **GUI Integration**: Potential development of a graphical interface to replace the command-line interface.
-- **Analytics**: Add features for more advanced analytics on purchase data, such as trends over time.
