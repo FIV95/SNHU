@@ -1,24 +1,4 @@
 # Corner Grocer Item-Tracking Program
-## Table of Contents
-
-1. [Introduction](#introduction)
-2. [Features](#features)
-3. [UML Diagram](#uml-diagram)
-4. [Classes](#classes)
-   - [App](#app)
-   - [Document](#document)
-   - [InputDocument](#inputdocument)
-   - [OutputDocument](#outputdocument)
-   - [Product](#product)
-   - [Validation](#validation)
-   - [DocumentProcessor](#documentprocessor)
-5. [Usage](#usage)
-   - [Setting Up](#setting-up)
-   - [Running the Program](#running-the-program)
-   - [Menu Options](#menu-options)
-6. [Code Structure](#code-structure)
-7. [Compilation and Execution](#compilation-and-execution)
-8. [Testing](#testing)
 
 ## Introduction
 
@@ -105,10 +85,8 @@ This project is designed to handle document-related operations, including readin
   - `readDocument()`: Reads the content of an `InputDocument`.
   - `setOption2()` and `setOption3()`: Generate specific sets of `Product` data for different program options.
 
-
 1. **Set input file path**: Allow the user to specify the file path for the input file.
 2. **Search for an item**: Prompt a user to input the item, or word, they wish to look for. Return a numeric value for the frequency of the specific word.
 3. **Print frequency of all items**: Print the list with numbers that represent the frequency of all items purchased.
 4. **Print histogram of item frequencies**: Print the same frequency information for all the items in the form of a histogram.
 5. **Exit the program**: Exit the application.
-
