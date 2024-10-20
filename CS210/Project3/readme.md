@@ -33,7 +33,7 @@ This project is designed to handle document-related operations, including readin
 
 ## UML Diagram
 
-![UML Diagram](path/to/uml-diagram.png)
+![UML Diagram](Lawrence_Francis_Project3_UML.png)
 
 ## Classes
 
