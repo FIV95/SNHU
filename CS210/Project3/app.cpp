@@ -105,3 +105,19 @@ void App::printOption2Results(std::vector<Product> products) {
         std::cout << "Product: " << product.getName() << " || Quantity: " << product.getQty() << std::endl;
     }
 }
+
+void App::printOption3Results(std::vector<Product> products) {
+    std::cout << "Option 3 results: " << std::endl;
+    const char SYMBOL = '*';
+    for (size_t i = 0; i < products.size(); ++i)
+    {
+        // std::cout << products.at(i).getName() << " " << products.at(i).getQty() << std::endl;
+        int qtyToPrint = products.at(i).getQty();
+        std::cout << products.at(i).getName();
+        for (size_t j = 0; j < qtyToPrint; ++j)
+        {
+            std::cout << "  " << SYMBOL; 
+        }
+        std::cout << std::endl;
+    }
+}

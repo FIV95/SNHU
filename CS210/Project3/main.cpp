@@ -72,7 +72,7 @@ int main()
                 std::cout << "No document loaded. Please load a document first." << std::endl;
                 continue;
             }
-            // FIX ME implement option 4
+            app.printOption3Results(app.getCurrentDocument()->getVectorContent());
         }
         if (app.getInput() == '5')
         {
