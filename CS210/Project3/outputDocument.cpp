@@ -38,17 +38,11 @@ void OutputDocument::setTitle(const std::string &title)
     this->_title = title;
 }
 
-// Override setPath
-void OutputDocument::setPath(const std::string &path)
+void OutputDocument::setPath(const std::string& path)
 {
-    // Resolve the absolute path
-    std::filesystem::path inputPath(path);
-    std::filesystem::path absolutePath = std::filesystem::absolute(inputPath);
-
-    // Set the path for the output document
+    std::filesystem::path absolutePath = std::filesystem::absolute(path);
     this->_path = absolutePath.string() + std::filesystem::path::preferred_separator + this->getTitle();
 }
-
 // Override getVectorContent() to return a reference
 std::vector<Product>& OutputDocument::getVectorContentRef()
 {
