@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is designed to handle document-related operations, including reading item purchase records, processing them, and generating output documents with sorted product data.
+This project is designed to handle document-related operations, including reading item purchase records, processing them, and generating output and documents with sorted product data.
 
 ## Features
 
@@ -20,34 +20,10 @@ This project is designed to handle document-related operations, including readin
 ### `App`
 
 - Manages the overall application flow and user interactions.
-- Attributes:
-  - `_running`: Indicates whether the application is running.
-  - `_hasDocument`: Indicates whether a document is loaded.
-  - `_currentDocument`: Pointer to the currently loaded document.
-  - `_input`: Stores user input.
-  - `_option1Results`: Stores results for option 1.
-- Methods:
-  - `printMenu()`: Displays the main menu.
-  - `setInput(const char &input)`: Sets the user input.
-  - `promptForQuery()`: Prompts the user for a query.
-  - `promptForInput()`: Prompts the user for input.
-  - `setCurrentDocument(InputDocument* inputDocument)`: Sets the current document.
-  - `setHasDocument(bool hasDocument)`: Sets the document loaded status.
-  - `setRunning(bool running)`: Sets the running status.
-  - `setQuery(const std::string &query)`: Sets the query.
-  - `setQueryComplete(bool queryComplete)`: Sets the query completion status.
-  - `promptForQueryComplete()`: Prompts the user for query completion.
-  - `setOption1Results(int result)`: Sets the results for option 1.
-  - `printOption1Results(std::string query)`: Prints the results for option 1.
-  - `printOption2Results(std::vector<Product> products)`: Prints the results for option 2.
-  - `printOption3Results(std::vector<Product> products)`: Prints the results for option 3.
 
 ### `Document`
 
-- The base class for handling document-related operations. It provides common attributes such as:
-  - `_path`: The file path of the document.
-  - `_title`: The document's title.
-  - `_products`: A collection of products in the document (represented by `Product` objects).
+- The base class for handling document-related operations.
 - Defines methods to manage document content, such as retrieving and setting both a vector of products and a hashtable (mapping product names to their quantities).
 
 ### `InputDocument` (inherits from `Document`)
@@ -65,9 +41,6 @@ This project is designed to handle document-related operations, including readin
 ### `Product`
 
 - Represents an item purchased at the store.
-- Attributes:
-  - `_name`: The name of the product.
-  - `_qty`: The quantity purchased.
 - Provides getter and setter methods for managing product data.
 
 ### `Validation`
@@ -90,3 +63,29 @@ This project is designed to handle document-related operations, including readin
 3. **Print frequency of all items**: Print the list with numbers that represent the frequency of all items purchased.
 4. **Print histogram of item frequencies**: Print the same frequency information for all the items in the form of a histogram.
 5. **Exit the program**: Exit the application.
+
+## CS210 Week 8 Journal Response
+
+### Question 1
+See the Introduction section of this readme.
+
+### Question 2
+This was the first project where I created a UML diagram before writing any code. It helped me blueprint the classes and visualize how the application's flow would develop. I felt my organization weakened toward the end, as small adjustments required refactoring other classes, but my initial start was strong. Moving forward, I will continue using the UML-first approach.
+
+### Question 3
+I think the `App` class could be debloated by creating a `User` class to store query results as the app progresses. Currently, the `App` class handles too much responsibility. I’d also consider introducing **smart pointers** to ensure automatic memory management, reducing the risk of memory leaks.  
+(Reference: [Smart Pointers in C++](https://www.geeksforgeeks.org/smart-pointers-cpp/))
+
+### Question 4
+I initially struggled to detect the operating system on which the program was running. This was necessary to implement a valid path-checking function. After finding the resource below, I was able to create the function I needed:  
+Koley, A. (2024, April 15). *How to detect operating system using C++*. CodersPacket.  
+(Reference: [CodersPacket](https://coderspacket.com/posts/how-to-detect-operating-system-using-c))
+
+Later, I discovered that I could have used `std::filesystem::path::make_preferred`.  
+(Reference: [cppreference](https://en.cppreference.com/w/cpp/filesystem/path/make_preferred))
+
+### Question 5
+I hadn’t utilized the `// FIXME` comment style before, but I found it extremely useful for marking areas to revisit later. Along with my UML-first approach, `FIXME` comments will be a tool I continue using in future projects.
+
+### Question 6
+By adhering to standard object-oriented programming (OOP) practices, I’ve left the project in good shape. The functionality is clearly defined within their respective classes, and anyone reading the `main()` function can easily understand the application flow. Additionally, I put significant effort into writing documentation and creating the UML diagram, making the project easier for others to understand if they collaborate with me in the future.
