@@ -13,3 +13,41 @@ CS210/Project3/frequency.dat
 CS210/Project3/.vscode/launch.json
 CS210/Project3/.vscode/settings.json
 CS210/Project3/test_outputDocument
+
+# Ignore all build output directories
+target/
+build/
+*.class
+
+# Ignore Java dependencies
+*.jar
+*.war
+*.ear
+
+# Ignore Maven and Gradle files that are generated and can be rebuilt
+.mvn/
+.gradle/
+.gradle/
+.settings/
+*.iml
+
+# Ignore IDE specific files
+.idea/
+*.log
+*.swp
+*.swo
+
+# Ignore binary files and debug files
+*.out
+*.dSYM/
+*.exe
+
+# Ignore specific files in CS210
+CS210/**/main
+CS210/**/temps
+CS210/**/*.dat
+CS210/**/*.txt
+
+# Ignore class files in CS230 Test directory
+CS230/Test/target/
+
