@@ -98,11 +98,6 @@ void OutputDocument::sortProductsByQtyFrequency()
     std::vector<Product>& vector = this->getVectorContentRef();
     recursivelySortProductsByQtyFrequency(vector, 0, vector.size() - 1);
 
-    // Debug print the vector after sorting
-    std::cout << "Products sorted by quantity frequency:" << std::endl;
-    for (const auto& product : vector) {
-        std::cout << "Name: " << product.getName() << ", Qty: " << product.getQty() << std::endl;
-    }
 }
 
 // Partition by name for quicksort
