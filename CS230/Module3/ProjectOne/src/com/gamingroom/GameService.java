@@ -23,8 +23,10 @@ public class GameService {
 	private static long nextGameId = 1;
 	// unique instance private member
 	private static GameService instance = null;
+	private static long nextPlayerId = 1;
+	private static long nextTeamId = 1;
 
-	// FIXME: Add missing pieces to turn this class a singleton 
+	// FIXME: Add missing pieces to turn this class a singleton
 	// Private constructor prevents instantiation from other classes
 	private GameService() {
 	}
@@ -36,7 +38,7 @@ public class GameService {
 	// this way we only have one instance of the GameService
 	// The Instance will host the instances of games
 	// This ensures all memory is managed in one place set by the singleton pattern
-	
+
 	// Public method to get the singleton instance
 	public static GameService getInstance() {
 		if (instance == null) {
@@ -60,23 +62,23 @@ public class GameService {
 	 * @return the game instance (new or existing)
 	 */
 	public Game addGame(String name) {
-			// instantiate the iterator
-			Iterator<Game> gameIterator = games.iterator();
-			// while loop to iterate through the games
-			while (gameIterator.hasNext()) {
-					Game game = gameIterator.next();
-					// if the game name is equal to the name passed in
-					if (game.getName().equals(name)) {
-							return game;
-					}
+		// instantiate the iterator
+		Iterator<Game> gameIterator = games.iterator();
+		// while loop to iterate through the games
+		while (gameIterator.hasNext()) {
+			Game game = gameIterator.next();
+			// if the game name is equal to the name passed in
+			if (game.getName().equals(name)) {
+				return game;
 			}
-	
-			// if not found, make a new game instance and add to list of games
-			Game game = new Game(nextGameId++, name);
-			games.add(game);
-	
-			// return the new/existing game instance to the caller
-			return game;
+		}
+
+		// if not found, make a new game instance and add to list of games
+		Game game = new Game(nextGameId++, name);
+		games.add(game);
+
+		// return the new/existing game instance to the caller
+		return game;
 	}
 
 	/**
@@ -84,13 +86,14 @@ public class GameService {
 	 * <p>
 	 * Scope is package/local for testing purposes.
 	 * </p>
+	 * 
 	 * @param index index position in the list to return
 	 * @return requested game instance
 	 */
 	Game getGame(int index) {
 		return games.get(index);
 	}
-	
+
 	/**
 	 * Returns the game instance with the specified id.
 	 * 
@@ -98,23 +101,19 @@ public class GameService {
 	 * @return requested game instance
 	 */
 	public Game getGame(long id) {
-			// instantiate the iterator
-			Iterator<Game> gameIterator = games.iterator();
-			// while loop to iterate through the games
-			while (gameIterator.hasNext()) {
-					Game game = gameIterator.next();
-					// if the game id is equal to the id passed in
-					if (game.getId() == id) {
-							return game;
-					}
+		// instantiate the iterator
+		Iterator<Game> gameIterator = games.iterator();
+		// while loop to iterate through the games
+		while (gameIterator.hasNext()) {
+			Game game = gameIterator.next();
+			// if the game id is equal to the id passed in
+			if (game.getId() == id) {
+				return game;
 			}
-			// throw catch if the game is not found
-			throw new IllegalArgumentException("Game not found");
+		}
+		// throw catch if the game is not found
+		throw new IllegalArgumentException("Game not found");
 	}
-
-		// FIXME: Use iterator to look for existing game with same id
-		// if found, simply assign that instance to the local variable
-
 
 	/**
 	 * Returns the game instance with the specified name.
@@ -123,18 +122,18 @@ public class GameService {
 	 * @return requested game instance
 	 */
 	public Game getGame(String name) {
-			// instantiate the iterator
-			Iterator<Game> gameIterator = games.iterator();
-			// while loop to iterate through the games
-			while (gameIterator.hasNext()) {
-					Game game = gameIterator.next();
-					// if the game name is equal to the name passed in
-					if (game.getName().equals(name)) {
-							return game;
-					}
+		// instantiate the iterator
+		Iterator<Game> gameIterator = games.iterator();
+		// while loop to iterate through the games
+		while (gameIterator.hasNext()) {
+			Game game = gameIterator.next();
+			// if the game name is equal to the name passed in
+			if (game.getName().equals(name)) {
+				return game;
 			}
-			// throw catch if the game is not found
-			throw new IllegalArgumentException("Game not found");
+		}
+		// throw catch if the game is not found
+		throw new IllegalArgumentException("Game not found");
 	}
 
 	/**
@@ -144,5 +143,15 @@ public class GameService {
 	 */
 	public int getGameCount() {
 		return games.size();
+	}
+
+	// function allows any class to get the next player id and assign it
+	public long getNextPlayerId() {
+		return nextPlayerId++;
+	}
+
+	// function allows any class to get the next team id and assign it
+	public long getNextTeamId() {
+		return nextTeamId++;
 	}
 }

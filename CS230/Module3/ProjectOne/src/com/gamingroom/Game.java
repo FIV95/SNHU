@@ -1,6 +1,7 @@
 package com.gamingroom;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A simple class to hold information about a game
@@ -32,24 +33,35 @@ public class Game extends Entity {
 		super(id, name);
 	}
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
+
+    // this function adds a team to the game
+    // it uses Java's built-in iterator to ensure each team is unique
+    public void addTeam(Team team) {
+			Iterator<Team> iterator = teams.iterator();
+			while (iterator.hasNext()) {
+					Team t = iterator.next();
+					if (t.getId() == team.getId()) {
+							System.out.println("Team " + team.getName() + " is already assigned to " + this.getName());
+							return;
+					}
+			}
+			this.teams.add(team);
 	}
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
+
+	// this function prints out the teams assigned to the game
+	public void printTeams() {
+		System.out.println("Teams assigned to " + this.getName() + ":");
+		for (Team team : teams) {
+			System.out.println(team.getName());
+		}
 	}
+
 
 	@Override
 	public String toString() {
 		
-		return "Game [id=" + id + ", name=" + name + "]";
+		return "Game [id=" + this.getId() + ", name=" + this.getName() + "]";
 	}
 
 }

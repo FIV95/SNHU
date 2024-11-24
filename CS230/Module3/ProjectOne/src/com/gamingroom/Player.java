@@ -23,6 +23,11 @@ public class Player extends Entity {
 		super(id, name);
 	}
 
+	// Constructor with only a name, the id is generated
+	public Player(String name) {
+		super(GameService.getInstance().getNextPlayerId(), name);
+	}
+
 	@Override
 	public String toString() {
 		return "Player [id=" + this.getId() + ", name=" + this.getName() + "]";
