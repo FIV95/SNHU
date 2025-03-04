@@ -51,3 +51,32 @@ CS210/**/*.txt
 # Ignore class files in CS230 Test directory
 CS230/Test/target/
 
+# Ignore the virtual environment folder
+myenv/
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Jupyter Notebook checkpoints (if using notebooks)
+.ipynb_checkpoints/
+
+# Ignore system-specific files
+.DS_Store  # macOS
+Thumbs.db  # Windows
+
+# Ignore dependencies if using a requirements file
+*.env
+.env
+
+# Ignore logs and cache
+logs/
+*.log
+
+# Ignore IDE/editor settings (VS Code, PyCharm, etc.)
+.vscode/
+.idea/
+*.swp
+
+
