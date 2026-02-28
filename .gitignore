@@ -79,4 +79,10 @@ logs/
 .idea/
 *.swp
 
+# Ignore Visual Studio .vs directories
+.vs/
+
+# Ignore CS330 textures (large files)
+CS330/**/textures/
+
 
